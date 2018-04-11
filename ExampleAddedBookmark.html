@@ -19,7 +19,6 @@
 
     <h1>Feel Like Surfing?</h1>
     <div class="controls">
-      <h2>Controls</h2>
       <button id="new-bookmark-btn">Add New Bookmark</button>
       <lable class="switch">
         <input type="checkbox">
@@ -35,8 +34,16 @@
         </select>
       </lable>
     </div>
+    
     <div class="bookmarks">
       <h2>Your Bookmarks</h2>
+      <!-- Start bookmark template example -->
+      <div class="bookmark">
+        <button class="expandToggle">Expand</button>
+        <span class="bookmark-title">Bookmark Title Goes Here</span>
+        <span class="bookmark-ranking">Ranking Goes Here</span>
+      </div>
+       <!-- End bookmark template example -->
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
