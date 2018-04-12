@@ -1,24 +1,27 @@
 /* global $ STORE API*/
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
 const BOOKMARKS = (function() {
   
   //Render Functions
   const generateAdd = () => {
     return `
-    <form id="new-bookmark-form">
-      <lable for="bookmark-title"></lable>
-        <input type="text" placeholder="Bookmark Title" id="bookmark-title">
-      <lable for="bookmark-url"></lable>
-        <input type="text" placeholder="Bookmark URL" id="bookmark-url">
-      <lable for="bookmark-rating"></lable>
-        <input type="number" placeholder="Rating" id="bookmark-rating">
-      <lable for="bookmark-desc"></lable>
-        <input type="textarea" placeholder="Description (optional)" id="bookmark-desc">
-      
-      <button id="add-btn-submit" type="submit">Add!</button>
-      <a href="#">Cancel</a>
-    </form>`;
+    <div class="new-bookmark">
+      <form id="new-bookmark-form">
+        <lable for="bookmark-title"></lable>
+          <input type="text" placeholder="Bookmark Title" id="bookmark-title">
+        <lable for="bookmark-url"></lable>
+          <input type="text" placeholder="Bookmark URL" id="bookmark-url">
+        <lable for="bookmark-rating"></lable>
+          <input type="number" placeholder="Rating" id="bookmark-rating">
+        <lable for="bookmark-desc"></lable>
+          <input type="textarea" placeholder="Description (optional)" id="bookmark-desc">
+        
+        <button id="add-btn-submit" type="submit">Add!</button>
+      </form>
+      <button class="cancel-add">Cancel</button>
+    </div>`;
   };
 
   const generateExpanded = (bookmark) => {
@@ -68,7 +71,12 @@ const BOOKMARKS = (function() {
     if (STORE.getNewBookmarkStatus() === true) {
       //UI changes
       $('.controls').append(generateAdd());
-      $('#new-bookmark-btn').addClass('hidden').after('<p>New Bookmark</p>');
+      $('#new-bookmark-btn').addClass('hidden').after('<p class="adding-title">New Bookmark</p>');
+    }
+    else{
+      $('.controls').find('.new-bookmark').remove();
+      $('.controls').find('.adding-title').remove();
+      $('#new-bookmark-btn').removeClass('hidden');
     }
 
     //read from STORE and add bookmarks
@@ -93,6 +101,13 @@ const BOOKMARKS = (function() {
   const handleAdd = () => {
     $('#new-bookmark-btn').on('click', ()=> {
       STORE.setNewBookmark(true);
+      render();
+    });
+  };
+  
+  const handleCancelAdd = () => {
+    $('.controls').on('click', '.cancel-add', (event)=>{
+      STORE.setNewBookmark(false);
       render();
     });
   };
@@ -160,6 +175,7 @@ const BOOKMARKS = (function() {
 
   return {
     handleAdd,
+    handleCancelAdd,
     handleAddSubmit,
     handleExpandSingle,
     handleDelete,

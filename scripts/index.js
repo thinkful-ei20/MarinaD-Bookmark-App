@@ -3,6 +3,7 @@
 
 const main = () => {
   BOOKMARKS.handleAdd();
+  BOOKMARKS.handleCancelAdd();
   BOOKMARKS.handleAddSubmit();
   BOOKMARKS.handleExpandSingle();
   BOOKMARKS.handleDelete();

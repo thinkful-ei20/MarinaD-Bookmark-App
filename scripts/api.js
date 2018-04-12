@@ -1,6 +1,7 @@
-/* global $ cuid*/
+/* global $ */
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
 const API = (function() {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/marinaD';
 
