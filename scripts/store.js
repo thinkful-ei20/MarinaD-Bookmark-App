@@ -16,6 +16,7 @@ const STORE = (function() {
   //create bookmark- newBookmark is an object given by the server after a successful POST API call
   const addBookmark = newBookmark => {
     newBookmark.edit = false;
+    newBookmark.expansion = false;
     bookmarks.push(newBookmark);
   };
   
@@ -36,6 +37,10 @@ const STORE = (function() {
     return bookmarks.filter((bookmark)=> bookmark.id === id)[0];
   };
 
+  const getBookmarkExpansion = (bookmark) => {
+    return bookmark.expansion;
+  };
+
   const getAllBookmarks = () => {
     return bookmarks;
   };
@@ -54,6 +59,10 @@ const STORE = (function() {
   //Set ExpansionStatus where status is true or false
   const setExpansionStatus = (status) => {
     expansionStatus = status;
+  };
+
+  const setBookmarkExpansion = (bookmark, status) => {
+    bookmark.expansion = status;
   };
   //Update a certain bookmark where newBookmark an object with some or all properties to edit
   const updateBookmark = (newBookmark) => {
@@ -78,12 +87,14 @@ const STORE = (function() {
     getSortBy,
     getExpansionStatus,
     getBookmarkByID,
+    getBookmarkExpansion,
     getAllBookmarks,
 
     //update functions
     setNewBookmark,
     setSortBy,
     setExpansionStatus,
+    setBookmarkExpansion,
     updateBookmark,
 
     //delete functions

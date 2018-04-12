@@ -31,7 +31,7 @@ const BOOKMARKS = (function() {
   //generate template string based on bookmark object from local store
   const generateBookmark = (bookmark) => {
     return `
-  <div class="bookmark">
+  <div class="bookmark" data-id="${bookmark.id}">
     <button class="expandToggle">Expand</button>
     <span class="bookmark-title">${bookmark.title}</span>
     <span class="bookmark-ranking">${bookmark.rating}</span>
@@ -77,6 +77,15 @@ const BOOKMARKS = (function() {
     });
   };
 
+  const handleExpandSingle = () => {
+    $('.bookmarks').on('click', '.expandToggle', (event)=> {
+      const bookmarkID = $(event.target).closest('.bookmark').data('id');
+      const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
+      const toggleExpansion = !STORE.getBookmarkExpansion(bookmarkObj);
+      STORE.setBookmarkExpansion(bookmarkObj,toggleExpansion);
+    });
+  };
+
   const handleExpandAll = () => {
 
   };
@@ -88,6 +97,7 @@ const BOOKMARKS = (function() {
   return {
     handleAdd,
     handleAddSubmit,
+    handleExpandSingle,
     handleExpandAll,
     handleSort,
     render
