@@ -18,7 +18,7 @@ const STORE = (function() {
     },
     {
       id : 1,
-      title: 'My test bookmark',
+      title: 'My second test bookmark',
       url: 'https://google.com',
       rating: 4,
       edit: false
@@ -49,6 +49,10 @@ const STORE = (function() {
 
   const getBookmarkByID = (id) => {
     return bookmarks.filter((bookmark)=> bookmark.id === id)[0];
+  };
+
+  const getAllBookmarks = () => {
+    return bookmarks;
   };
 
   //Update Functions
@@ -89,6 +93,7 @@ const STORE = (function() {
     getSortBy,
     getExpansionStatus,
     getBookmarkByID,
+    getAllBookmarks,
 
     //update functions
     setNewBookmark,
@@ -98,12 +103,6 @@ const STORE = (function() {
 
     //delete functions
     deleteBookmark,
-
-    //testing TO BE REMOVED
-    bookmarks,
-    newBookmark,
-    sortBy,
-    expansionStatus
   };
 }());
 

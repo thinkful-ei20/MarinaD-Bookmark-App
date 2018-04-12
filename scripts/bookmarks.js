@@ -1,4 +1,4 @@
-/* global $ */
+/* global $ STORE*/
 'use strict';
 
 const BOOKMARKS = (function() {
@@ -13,8 +13,9 @@ const BOOKMARKS = (function() {
   };
 
   //generate template string based on bookmark object from local store
-  const generateBookmarks = (bookmark) => {
-    return `<div class="bookmark">
+  const generateBookmark = (bookmark) => {
+    return `
+  <div class="bookmark">
     <button class="expandToggle">Expand</button>
     <span class="bookmark-title">${bookmark.title}</span>
     <span class="bookmark-ranking">${bookmark.rating}</span>
@@ -23,6 +24,10 @@ const BOOKMARKS = (function() {
 
   const render = () => {
 
+    const html = STORE.getAllBookmarks().map((bookmark)=>{
+      return generateBookmark(bookmark);
+    }).join('');
+    $('.bookmarks').html(html);
   };
 
   //Event Handlers
@@ -42,5 +47,6 @@ const BOOKMARKS = (function() {
     handleAdd,
     handleExpandAll,
     handleSort,
+    render
   };
 }());
