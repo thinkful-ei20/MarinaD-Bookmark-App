@@ -26,7 +26,7 @@ const BOOKMARKS = (function() {
 
   const generateExpanded = (bookmark) => {
     return `
-    <div class="bookmark" data-id="${bookmark.id}">
+    <li class="bookmark" data-id="${bookmark.id}">
       <button class="expandToggle">Expand</button>
       <span class="bookmark-title">${bookmark.title}</span>
       <span class="bookmark-ranking">${bookmark.rating}</span>
@@ -34,12 +34,12 @@ const BOOKMARKS = (function() {
       <p class="bookmark-description">${bookmark.desc}</p>
       <button class="edit-btn">Edit</button>
       <button class="delete-btn">Delete</button>      
-    </div>`;
+    </li>`;
   };
 
   const generateEdit = (bookmark) => {
     return `
-    <div class="bookmark" data-id="${bookmark.id}">
+    <li class="bookmark" data-id="${bookmark.id}">
       <button class="expandToggle">Expand</button>
       <form id="edit-bookmark">
         <label for="title-edit"></label>
@@ -53,33 +53,38 @@ const BOOKMARKS = (function() {
         <button type="submit">Edit This Bookmark</button>  
       </form> 
       <button class="cancel-edit">Cancel</button>   
-    </div>`;
+    </li>`;
   };
 
   //generate template string based on bookmark object from local store
   const generateBookmark = (bookmark) => {
     return `
-  <div class="bookmark" data-id="${bookmark.id}">
+  <li class="bookmark" data-id="${bookmark.id}">
     <button class="expandToggle">Expand</button>
     <span class="bookmark-title">${bookmark.title}</span>
     <span class="bookmark-ranking">${bookmark.rating}</span>
-  </div>`;
+  </li>`;
   };
 
   const render = () => {
     //what to do if user clicks "add new bookmark"
     if (STORE.getNewBookmarkStatus() === true) {
       //UI changes
+      console.log('newBookmark is true');
       $('.controls').append(generateAdd());
       $('#new-bookmark-btn').addClass('hidden').after('<p class="adding-title">New Bookmark</p>');
+      STORE.setNewBookmark(false);
     }
     else{
+      console.log('newbookmark is false');
       $('.controls').find('.new-bookmark').remove();
       $('.controls').find('.adding-title').remove();
       $('#new-bookmark-btn').removeClass('hidden');
     }
 
     //read from STORE and add bookmarks
+    console.log('rendering from store');
+    console.log(STORE.getAllBookmarks());
     const html = STORE.getAllBookmarks().map((bookmark)=>{
       if (STORE.getBookmarkExpansion(bookmark)){
         //nested if statement to change html based on if editing or not
@@ -126,9 +131,12 @@ const BOOKMARKS = (function() {
         bookmarkURL,
         bookmarkRating, 
         bookmarkDesc, 
-        (results) => STORE.addBookmark(results), 
+        (results) => {
+          STORE.addBookmark(results);
+          render();
+        }, 
         (results)=>{console.log('Failure: ' + results);});
-      render();
+      
     });
   };
 
