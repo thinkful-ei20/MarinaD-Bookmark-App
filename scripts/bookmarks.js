@@ -37,6 +37,25 @@ const BOOKMARKS = (function() {
     </div>`;
   };
 
+  const generateEdit = (bookmark) => {
+    return `
+    <div class="bookmark" data-id="${bookmark.id}">
+      <button class="expandToggle">Expand</button>
+      <form id="edit-bookmark">
+        <label for="title-edit"></label>
+        <input type="text" id="title-edit" class="bookmark-title-edit" placeholder="${bookmark.title}">
+        <label for="rating-edit"></label>
+        <input type="number" id="rating-edit" class="bookmark-ranking-edit" placeholder="${bookmark.rating}">
+        <label for="url-edit"></label>
+        <input type="text" id="url-edit" class="bookmark-url-edit" placeholder="${bookmark.url}">
+        <label for="desc-edit"></label>
+        <input type="textarea" id="desc-edit" class="bookmark-description-edit" placeholder="${bookmark.desc}">
+        <button type="submit">Edit This Bookmark</button>  
+      </form> 
+      <button class="cancel-edit">Cancel</button>   
+    </div>`;
+  };
+
   //generate template string based on bookmark object from local store
   const generateBookmark = (bookmark) => {
     return `
@@ -58,7 +77,13 @@ const BOOKMARKS = (function() {
     //read from STORE and add bookmarks
     const html = STORE.getAllBookmarks().map((bookmark)=>{
       if (STORE.getBookmarkExpansion(bookmark)){
-        return generateExpanded(bookmark);
+        //nested if statement to change html based on if editing or not
+        if (STORE.getBookmarkEdit(bookmark)){
+          return generateEdit(bookmark);
+        }
+        else {
+          return generateExpanded(bookmark);
+        }
       }
       else {
         return generateBookmark(bookmark);
@@ -124,6 +149,7 @@ const BOOKMARKS = (function() {
       const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
       const editStatus = !STORE.getBookmarkEdit(bookmarkObj);
       STORE.setBookmarkEdit(bookmarkObj, editStatus);
+      render();
     });
   };
 
