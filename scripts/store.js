@@ -28,8 +28,9 @@ const STORE = (function() {
   //CRUD Functions, public
 
   //Create Functions
-  //create bookmark- newBookmark is an object containing all necessary keys
+  //create bookmark- newBookmark is an object given by the server after a successful POST API call
   const addBookmark = newBookmark => {
+    newBookmark.edit = false;
     bookmarks.push(newBookmark);
   };
   
