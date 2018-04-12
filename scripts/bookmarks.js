@@ -1,4 +1,4 @@
-/* global $ STORE*/
+/* global $ STORE API*/
 'use strict';
 
 const BOOKMARKS = (function() {
@@ -19,7 +19,7 @@ const BOOKMARKS = (function() {
       <lable>
         <input type="textarea" placeholder="Description (optional)" id="bookmark-desc">
       </lable>
-      <button type="submit">Add!</button>
+      <button id="add-btn-submit" type="submit">Add!</button>
       <a href="#">Cancel</a>
     </form>`;
   };
@@ -41,6 +41,7 @@ const BOOKMARKS = (function() {
   const render = () => {
     //what to do if user clicks "add new bookmark"
     if (STORE.getNewBookmarkStatus() === true) {
+      //UI changes
       $('.controls').append(generateAdd());
       $('#new-bookmark-btn').addClass('hidden').after('<p>New Bookmark</p>');
     }
@@ -60,6 +61,19 @@ const BOOKMARKS = (function() {
     });
   };
 
+  const handleAddSubmit = () => {
+    $('.controls').on('submit', '#new-bookmark-form', (event)=> {
+      event.preventDefault();
+
+      const bookmarkTitle = $('#bookmark-title').val();
+      const bookmarkURL = $('#bookmark-url').val();
+      const bookmarkRating = $('#bookmark-rating').val();
+      const bookmarkDesc = $('#bookmark-desc').val();
+      console.log(typeof bookmarkTitle);
+      API.createBookmark(bookmarkTitle, bookmarkURL,bookmarkRating, bookmarkDesc, (results) => STORE.addBookmark(results), (results)=>{console.log('Failure: ' + results);});
+    });
+  };
+
   const handleExpandAll = () => {
 
   };
@@ -70,6 +84,7 @@ const BOOKMARKS = (function() {
 
   return {
     handleAdd,
+    handleAddSubmit,
     handleExpandAll,
     handleSort,
     render

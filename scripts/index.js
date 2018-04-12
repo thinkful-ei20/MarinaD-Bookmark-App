@@ -3,6 +3,7 @@
 
 const main = () => {
   BOOKMARKS.handleAdd();
+  BOOKMARKS.handleAddSubmit();
   API.getBookmarks((results) =>{
     results.map((bookmark)=>{
       STORE.addBookmark(bookmark);
