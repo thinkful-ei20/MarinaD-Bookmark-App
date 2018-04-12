@@ -30,8 +30,10 @@ const BOOKMARKS = (function() {
       <button class="expandToggle">Expand</button>
       <span class="bookmark-title">${bookmark.title}</span>
       <span class="bookmark-ranking">${bookmark.rating}</span>
-      <p class="bookmark-url">${bookmark.url}</p>
+      <p class="bookmark-url">${bookmark.url} <a href="${bookmark.url}">Visit Site</a></p>
       <p class="bookmark-description">${bookmark.desc}</p>
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>      
     </div>`;
   };
 
@@ -103,6 +105,19 @@ const BOOKMARKS = (function() {
     });
   };
 
+  const handleDelete = () => {
+    $('.bookmarks').on('click','.delete-btn',(event)=>{
+      const bookmarkID = $(event.target).closest('.bookmark').data('id');
+      API.deleteBookmark(
+        bookmarkID,
+        ()=> {
+          STORE.deleteBookmark(bookmarkID);
+          render();},
+        (results) => {console.log(results);}
+      );
+    });
+  };
+
   const handleExpandAll = () => {
 
   };
@@ -115,6 +130,7 @@ const BOOKMARKS = (function() {
     handleAdd,
     handleAddSubmit,
     handleExpandSingle,
+    handleDelete,
     handleExpandAll,
     handleSort,
     render
