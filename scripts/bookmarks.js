@@ -118,6 +118,15 @@ const BOOKMARKS = (function() {
     });
   };
 
+  const handleEdit = () => {
+    $('.bookmarks').on('click','.edit-btn', (event) =>{
+      const bookmarkID = $(event.target).closest('.bookmark').data('id');
+      const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
+      const editStatus = !STORE.getBookmarkEdit(bookmarkObj);
+      STORE.setBookmarkEdit(bookmarkObj, editStatus);
+    });
+  };
+
   const handleExpandAll = () => {
 
   };
@@ -131,6 +140,7 @@ const BOOKMARKS = (function() {
     handleAddSubmit,
     handleExpandSingle,
     handleDelete,
+    handleEdit,
     handleExpandAll,
     handleSort,
     render

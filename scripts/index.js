@@ -6,6 +6,7 @@ const main = () => {
   BOOKMARKS.handleAddSubmit();
   BOOKMARKS.handleExpandSingle();
   BOOKMARKS.handleDelete();
+  BOOKMARKS.handleEdit();
   API.getBookmarks((results) =>{
     results.map((bookmark)=>{
       STORE.addBookmark(bookmark);

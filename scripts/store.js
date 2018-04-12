@@ -41,6 +41,10 @@ const STORE = (function() {
     return bookmark.expansion;
   };
 
+  const getBookmarkEdit = (bookmark) =>{
+    return bookmark.edit;
+  };
+
   const getAllBookmarks = () => {
     return bookmarks;
   };
@@ -64,11 +68,13 @@ const STORE = (function() {
   const setBookmarkExpansion = (bookmark, status) => {
     bookmark.expansion = status;
   };
-  //Update a certain bookmark where newBookmark an object with some or all properties to edit
-  const updateBookmark = (newBookmark) => {
-    const bookmarkToEdit = getBookmarkByID(newBookmark.id);
-    Object.assign(bookmarkToEdit, newBookmark);
 
+  const setBookmarkEdit = (bookmark, status) => {
+    bookmark.edit = status;
+  };
+  //Update a certain bookmark where newBookmark an object with some or all properties to edit
+  const updateBookmark = (id, newBookmark) => {
+    Object.assign(id, newBookmark);
   };
 
   //Delete Functions
@@ -88,6 +94,7 @@ const STORE = (function() {
     getExpansionStatus,
     getBookmarkByID,
     getBookmarkExpansion,
+    getBookmarkEdit,
     getAllBookmarks,
 
     //update functions
@@ -95,6 +102,7 @@ const STORE = (function() {
     setSortBy,
     setExpansionStatus,
     setBookmarkExpansion,
+    setBookmarkEdit,
     updateBookmark,
 
     //delete functions
