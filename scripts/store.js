@@ -1,6 +1,7 @@
-/* global $ cuid*/
+/* global cuid*/
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
 const STORE = (function() {
   
   //Local STORE varialbes, not public
@@ -74,11 +75,8 @@ const STORE = (function() {
   //Delete Functions
   //Delete a certain bookmark where id is the id of the bookmark object from the bookmarks array
   const deleteBookmark = (id) => {
-    console.log('delete bookmark ran');
     const arrIndex = bookmarks.findIndex(bookmark => bookmark.id === id);
-    console.log(arrIndex);
     bookmarks.splice(arrIndex, 1);
-    console.log(bookmarks);
   };
 
   return {
