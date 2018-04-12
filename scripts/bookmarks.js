@@ -24,8 +24,15 @@ const BOOKMARKS = (function() {
     </form>`;
   };
 
-  const generateExpanded = () => {
-
+  const generateExpanded = (bookmark) => {
+    return `
+    <div class="bookmark" data-id="${bookmark.id}">
+      <button class="expandToggle">Expand</button>
+      <span class="bookmark-title">${bookmark.title}</span>
+      <span class="bookmark-ranking">${bookmark.rating}</span>
+      <p class="bookmark-url">${bookmark.url}</p>
+      <p class="bookmark-description">${bookmark.desc}</p>
+    </div>`;
   };
 
   //generate template string based on bookmark object from local store
@@ -48,7 +55,12 @@ const BOOKMARKS = (function() {
 
     //read from STORE and add bookmarks
     const html = STORE.getAllBookmarks().map((bookmark)=>{
-      return generateBookmark(bookmark);
+      if (STORE.getBookmarkExpansion(bookmark)){
+        return generateExpanded(bookmark);
+      }
+      else {
+        return generateBookmark(bookmark);
+      }
     }).join('');
     $('.bookmarks').html(html);
   };
@@ -71,8 +83,12 @@ const BOOKMARKS = (function() {
       if(bookmarkRating === '') bookmarkRating = undefined;
       let bookmarkDesc = $('#bookmark-desc').val();
       if(bookmarkDesc === '') bookmarkDesc = undefined;
-      console.log(bookmarkRating);
-      API.createBookmark(bookmarkTitle, bookmarkURL,bookmarkRating, bookmarkDesc, (results) => STORE.addBookmark(results), (results)=>{console.log('Failure: ' + results);});
+      API.createBookmark(bookmarkTitle, 
+        bookmarkURL,
+        bookmarkRating, 
+        bookmarkDesc, 
+        (results) => STORE.addBookmark(results), 
+        (results)=>{console.log('Failure: ' + results);});
       render();
     });
   };
@@ -83,6 +99,7 @@ const BOOKMARKS = (function() {
       const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
       const toggleExpansion = !STORE.getBookmarkExpansion(bookmarkObj);
       STORE.setBookmarkExpansion(bookmarkObj,toggleExpansion);
+      render();
     });
   };
 
