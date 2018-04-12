@@ -2,6 +2,7 @@
 'use strict';
 
 const main = () => {
+  BOOKMARKS.handleAdd();
   API.getBookmarks((results) =>{
     results.map((bookmark)=>{
       STORE.addBookmark(bookmark);

@@ -3,5 +3,9 @@ h1 {
 }
 
 .hidden {
-  display: hidden;
+  display: none;
+}
+
+.bookmark {
+  border: 2px solid blue;
 }
