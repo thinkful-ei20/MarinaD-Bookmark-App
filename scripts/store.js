@@ -8,22 +8,7 @@ const STORE = (function() {
   let newBookmark = false;
   let sortBy = 'all';
   let expansionStatus = false;  
-  let bookmarks = [
-    {
-      id : cuid(),
-      title: 'My test bookmark',
-      url: 'https://google.com',
-      rating: 4,
-      edit: false
-    },
-    {
-      id : 1,
-      title: 'My second test bookmark',
-      url: 'https://google.com',
-      rating: 4,
-      edit: false
-    }
-  ];
+  let bookmarks = [];
 
   //CRUD Functions, public
 

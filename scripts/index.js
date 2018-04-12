@@ -1,9 +1,13 @@
-/* global $ cuid API BOOKMARKS*/
+/* global $ STORE API BOOKMARKS*/
 'use strict';
 
 const main = () => {
-  BOOKMARKS.render();
-
+  API.getBookmarks((results) =>{
+    results.map((bookmark)=>{
+      STORE.addBookmark(bookmark);
+    });
+    BOOKMARKS.render();
+  });
 };
 
 $(main);
