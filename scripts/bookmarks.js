@@ -7,18 +7,15 @@ const BOOKMARKS = (function() {
   const generateAdd = () => {
     return `
     <form id="new-bookmark-form">
-      <lable>
+      <lable for="bookmark-title"></lable>
         <input type="text" placeholder="Bookmark Title" id="bookmark-title">
-      </lable>
-      <lable>
+      <lable for="bookmark-url"></lable>
         <input type="text" placeholder="Bookmark URL" id="bookmark-url">
-      </lable>
-      <lable>
+      <lable for="bookmark-rating"></lable>
         <input type="number" placeholder="Rating" id="bookmark-rating">
-      </lable>
-      <lable>
+      <lable for="bookmark-desc"></lable>
         <input type="textarea" placeholder="Description (optional)" id="bookmark-desc">
-      </lable>
+      
       <button id="add-btn-submit" type="submit">Add!</button>
       <a href="#">Cancel</a>
     </form>`;
