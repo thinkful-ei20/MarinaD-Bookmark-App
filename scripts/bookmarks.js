@@ -67,10 +67,13 @@ const BOOKMARKS = (function() {
 
       const bookmarkTitle = $('#bookmark-title').val();
       const bookmarkURL = $('#bookmark-url').val();
-      const bookmarkRating = $('#bookmark-rating').val();
-      const bookmarkDesc = $('#bookmark-desc').val();
-      console.log(typeof bookmarkTitle);
+      let bookmarkRating = $('#bookmark-rating').val();
+      if(bookmarkRating === '') bookmarkRating = undefined;
+      let bookmarkDesc = $('#bookmark-desc').val();
+      if(bookmarkDesc === '') bookmarkDesc = undefined;
+      console.log(bookmarkRating);
       API.createBookmark(bookmarkTitle, bookmarkURL,bookmarkRating, bookmarkDesc, (results) => STORE.addBookmark(results), (results)=>{console.log('Failure: ' + results);});
+      render();
     });
   };
 
