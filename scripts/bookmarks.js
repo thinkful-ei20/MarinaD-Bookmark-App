@@ -211,14 +211,26 @@ const BOOKMARKS = (function() {
   const handleEditCancel = () => {
     $('.bookmarks').on('click','.cancel-edit',(event)=>{
       const currentBookmarkID = $(event.target).closest('.bookmark').data('id');
-      console.log(currentBookmarkID);
       STORE.updateBookmark(currentBookmarkID, {edit: false});
       render();
     });
   };
 
   const handleExpandAll = () => {
-
+    $('.expand-all').on('change', () => {
+      if($('.expand-all').prop('checked') === true){
+        STORE.getAllBookmarks().map(bookmark => {
+          STORE.setBookmarkExpansion(bookmark, true);
+        });
+        render();
+      }
+      else {
+        STORE.getAllBookmarks().map(bookmark => {
+          STORE.setBookmarkExpansion(bookmark, false);
+        });
+        render();
+      }
+    });
   };
 
   const handleSort = () => {
