@@ -8,6 +8,7 @@ const STORE = (function() {
   let sortBy = 0;
   let expansionStatus = false;  
   let bookmarks = [];
+  let error = null;
 
   //CRUD Functions, public
 
@@ -109,8 +110,8 @@ const STORE = (function() {
     //delete functions
     deleteBookmark,
 
-    //testing
-    bookmarks
+    //error
+    error
   };
 }());
 

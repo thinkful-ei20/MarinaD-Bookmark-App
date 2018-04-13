@@ -66,6 +66,19 @@ const BOOKMARKS = (function() {
   </li>`;
   };
 
+  const generateErrorMsg = () => {
+    return `
+    <div class="modal">
+      <div id="overlay"></div>
+      <div id="error-message">
+        <p id="error-content">${STORE.error}</p>
+        <a href="#" id="err-close">close</a>
+      </div>
+    </div>
+    `;
+  };
+
+
   const render = () => {
     //what to do if user clicks "add new bookmark"
     if (STORE.getNewBookmarkStatus() === true) {
@@ -100,6 +113,25 @@ const BOOKMARKS = (function() {
       }      
     }).join('');
     $('.bookmarks').html(html);
+    //Check if there is an error
+    if (STORE.error !== null){
+      $('.controls').append(generateErrorMsg());
+      handleErrorClose();
+      STORE.error = null;
+    }
+  };
+
+  //Error Handler
+  const handleError = (result) => {
+    const errStr = `Oops! ${result.responseJSON.message}`;
+    STORE.error = errStr;
+    render();
+  };
+
+  const handleErrorClose = () =>{
+    $('#err-close').on('click', ()=>{
+      $('.controls').find('.modal').remove();
+    });
   };
 
   //Event Handlers
@@ -135,7 +167,7 @@ const BOOKMARKS = (function() {
           STORE.addBookmark(results);
           render();
         }, 
-        (results)=>{console.log('Failure: ' + results);});
+        (results)=>{handleError(results);});
       
     });
   };
@@ -160,7 +192,7 @@ const BOOKMARKS = (function() {
         ()=> {
           STORE.deleteBookmark(bookmarkID);
           render();},
-        (results) => {console.log(results);}
+        (results) => {handleError(results);}
       );
     });
   };
@@ -206,7 +238,7 @@ const BOOKMARKS = (function() {
             render();
           });
         },
-        (results)=>{console.log('Failure: ' + results);});
+        (results)=>{handleError(results);});
     });
   };
 
