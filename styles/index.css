@@ -122,6 +122,9 @@ ul {
   margin: 0px 20px;
 }
 
+.bookmark-ranking {
+  margin-left: 10px;
+}
 #overlay {
   position: fixed;
   top: 0;

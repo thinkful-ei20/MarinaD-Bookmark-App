@@ -29,7 +29,7 @@ const BOOKMARKS = (function() {
     <li class="bookmark" data-id="${bookmark.id}">
       <button class="expandToggle">Expand</button>
       <span class="bookmark-title">${bookmark.title}</span>
-      <span class="bookmark-ranking">${bookmark.rating}</span>
+      <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
       <p class="bookmark-url">${bookmark.url} <a href="${bookmark.url}">Visit Site</a></p>
       <p class="bookmark-description">${bookmark.desc}</p>
       <button class="edit-btn">Edit</button>
@@ -62,7 +62,7 @@ const BOOKMARKS = (function() {
   <li class="bookmark" data-id="${bookmark.id}">
     <button class="expandToggle">Expand</button>
     <span class="bookmark-title">${bookmark.title}</span>
-    <span class="bookmark-ranking">${bookmark.rating}</span>
+    <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
   </li>`;
   };
 
