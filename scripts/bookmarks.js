@@ -195,7 +195,12 @@ const BOOKMARKS = (function() {
         bookmarkDesc, 
         () => {
           API.getBookmarks(() =>{
-            STORE.setBookmarkEdit(bookmarkId, false);
+            const newBookmark = {edit: false}; 
+            if(bookmarkTitle !== undefined) newBookmark.title = bookmarkTitle; 
+            if(bookmarkURL !== undefined) newBookmark.url = bookmarkURL;
+            if(bookmarkRating !== undefined) newBookmark.rating = bookmarkRating;
+            if(bookmarkDesc !== undefined) newBookmark.desc = bookmarkDesc;
+            STORE.updateBookmark(bookmarkId, newBookmark);
             render();
           });
         },
