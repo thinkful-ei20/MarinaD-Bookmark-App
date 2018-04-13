@@ -11,6 +11,7 @@ const main = () => {
   BOOKMARKS.handleEditSubmit();
   BOOKMARKS.handleEditCancel();
   BOOKMARKS.handleExpandAll();
+  BOOKMARKS.handleSort();
   API.getBookmarks((results) =>{
     results.map((bookmark)=>{
       STORE.addBookmark(bookmark);

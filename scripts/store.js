@@ -5,7 +5,7 @@ const STORE = (function() {
   
   //Local STORE varialbes, not public
   let newBookmark = false;
-  let sortBy = 'all';
+  let sortBy = 0;
   let expansionStatus = false;  
   let bookmarks = [];
 

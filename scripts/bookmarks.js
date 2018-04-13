@@ -84,18 +84,20 @@ const BOOKMARKS = (function() {
 
     //read from STORE and add bookmarks
     const html = STORE.getAllBookmarks().map((bookmark)=>{
-      if (STORE.getBookmarkExpansion(bookmark)){
-        //nested if statement to change html based on if editing or not
-        if (STORE.getBookmarkEdit(bookmark)){
-          return generateEdit(bookmark);
+      if(bookmark.rating >= STORE.getSortBy()){
+        if (STORE.getBookmarkExpansion(bookmark)){
+          //nested if statement to change html based on if editing or not
+          if (STORE.getBookmarkEdit(bookmark)){
+            return generateEdit(bookmark);
+          }
+          else {
+            return generateExpanded(bookmark);
+          }
         }
         else {
-          return generateExpanded(bookmark);
+          return generateBookmark(bookmark);
         }
-      }
-      else {
-        return generateBookmark(bookmark);
-      }
+      }      
     }).join('');
     $('.bookmarks').html(html);
   };
@@ -234,7 +236,11 @@ const BOOKMARKS = (function() {
   };
 
   const handleSort = () => {
-
+    $('#sort-by').on('change', (event)=>{
+      const val = $(event.target).find(':selected').val();
+      STORE.setSortBy(val);
+      render();
+    });
   };
 
   return {
