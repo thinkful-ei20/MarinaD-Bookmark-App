@@ -68,12 +68,14 @@ const STORE = (function() {
     bookmark.expansion = status;
   };
 
-  const setBookmarkEdit = (bookmark, status) => {
-    bookmark.edit = status;
+  const setBookmarkEdit = (id, status) => {
+    const arrIndex = bookmarks.findIndex(bookmark => bookmark.id === id);
+    bookmarks[arrIndex].edit = status;
   };
   //Update a certain bookmark where newBookmark an object with some or all properties to edit
   const updateBookmark = (id, newBookmark) => {
-    Object.assign(id, newBookmark);
+    const originalBookmark = getBookmarkByID(id);
+    Object.assign(originalBookmark, newBookmark);
   };
 
   //Delete Functions
@@ -106,6 +108,9 @@ const STORE = (function() {
 
     //delete functions
     deleteBookmark,
+
+    //testing
+    bookmarks
   };
 }());
 

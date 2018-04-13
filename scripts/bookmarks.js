@@ -70,21 +70,19 @@ const BOOKMARKS = (function() {
     //what to do if user clicks "add new bookmark"
     if (STORE.getNewBookmarkStatus() === true) {
       //UI changes
-      console.log('newBookmark is true');
       $('.controls').append(generateAdd());
-      $('#new-bookmark-btn').addClass('hidden').after('<p class="adding-title">New Bookmark</p>');
+      $('#new-bookmark-btn')
+        .addClass('hidden')
+        .after('<p class="adding-title">New Bookmark</p>');
       STORE.setNewBookmark(false);
     }
     else{
-      console.log('newbookmark is false');
       $('.controls').find('.new-bookmark').remove();
       $('.controls').find('.adding-title').remove();
       $('#new-bookmark-btn').removeClass('hidden');
     }
 
     //read from STORE and add bookmarks
-    console.log('rendering from store');
-    console.log(STORE.getAllBookmarks());
     const html = STORE.getAllBookmarks().map((bookmark)=>{
       if (STORE.getBookmarkExpansion(bookmark)){
         //nested if statement to change html based on if editing or not
@@ -111,7 +109,7 @@ const BOOKMARKS = (function() {
   };
   
   const handleCancelAdd = () => {
-    $('.controls').on('click', '.cancel-add', (event)=>{
+    $('.controls').on('click', '.cancel-add', ()=>{
       STORE.setNewBookmark(false);
       render();
     });
@@ -142,7 +140,9 @@ const BOOKMARKS = (function() {
 
   const handleExpandSingle = () => {
     $('.bookmarks').on('click', '.expandToggle', (event)=> {
-      const bookmarkID = $(event.target).closest('.bookmark').data('id');
+      const bookmarkID = $(event.target)
+        .closest('.bookmark')
+        .data('id');
       const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
       const toggleExpansion = !STORE.getBookmarkExpansion(bookmarkObj);
       STORE.setBookmarkExpansion(bookmarkObj,toggleExpansion);
@@ -166,10 +166,40 @@ const BOOKMARKS = (function() {
   const handleEdit = () => {
     $('.bookmarks').on('click','.edit-btn', (event) =>{
       const bookmarkID = $(event.target).closest('.bookmark').data('id');
-      const bookmarkObj = STORE.getBookmarkByID(bookmarkID);
-      const editStatus = !STORE.getBookmarkEdit(bookmarkObj);
-      STORE.setBookmarkEdit(bookmarkObj, editStatus);
+      STORE.setBookmarkEdit(bookmarkID, true);
       render();
+    });
+  };
+
+  const handleEditSubmit = () => {
+    $('.bookmarks').on('submit', '#edit-bookmark', (event)=>{
+      event.preventDefault();
+
+      const bookmarkId = $(event.target).closest('.bookmark').data('id');
+      
+      let bookmarkTitle = $('#title-edit').val();
+      if(bookmarkTitle === '') bookmarkTitle = undefined;
+
+      let bookmarkURL = $('#url-edit').val();
+      if(bookmarkURL === '') bookmarkURL = undefined;
+
+      let bookmarkRating = $('#rating-edit').val();
+      if(bookmarkRating === '') bookmarkRating = undefined;
+
+      let bookmarkDesc = $('#desc-edit').val();
+      if(bookmarkDesc === '') bookmarkDesc = undefined;
+
+      API.updateBookmark(bookmarkId, bookmarkTitle, 
+        bookmarkURL,
+        bookmarkRating, 
+        bookmarkDesc, 
+        () => {
+          API.getBookmarks(() =>{
+            STORE.setBookmarkEdit(bookmarkId, false);
+            render();
+          });
+        },
+        (results)=>{console.log('Failure: ' + results);});
     });
   };
 
@@ -188,6 +218,7 @@ const BOOKMARKS = (function() {
     handleExpandSingle,
     handleDelete,
     handleEdit,
+    handleEditSubmit,
     handleExpandAll,
     handleSort,
     render

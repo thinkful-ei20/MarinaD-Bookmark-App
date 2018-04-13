@@ -8,6 +8,7 @@ const main = () => {
   BOOKMARKS.handleExpandSingle();
   BOOKMARKS.handleDelete();
   BOOKMARKS.handleEdit();
+  BOOKMARKS.handleEditSubmit();
   API.getBookmarks((results) =>{
     results.map((bookmark)=>{
       STORE.addBookmark(bookmark);

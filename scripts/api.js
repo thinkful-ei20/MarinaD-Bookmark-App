@@ -28,12 +28,17 @@ const API = (function() {
   };
 
   //Patch server record where updateData is an object containing title and/or desc and/or rating
-  const updateBookmark = (id, updateData, callback, errCallback) => {
+  const updateBookmark = (id, bookmarkTitle, bookmarkUrl, bookmarkRating, bookmarkDesc, callback, errCallback) => {
     $.ajax({
       url: `${BASE_URL}/bookmarks/${id}`,
       method: 'PATCH',
       contentType: 'application/json',
-      data: JSON.stringify(updateData),
+      data: JSON.stringify({
+        title: bookmarkTitle,
+        url: bookmarkUrl,
+        rating: bookmarkRating,
+        desc: bookmarkDesc
+      }),
       success: callback,
       error: errCallback
     });
