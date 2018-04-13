@@ -9,7 +9,6 @@ const STORE = (function() {
   let expansionStatus = false;  
   let bookmarks = [];
   let error = null;
-
   //CRUD Functions, public
 
   //Create Functions
