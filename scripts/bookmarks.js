@@ -81,6 +81,7 @@ const BOOKMARKS = (function() {
 
   const render = () => {
     //what to do if user clicks "add new bookmark"
+    $('main').prop('hidden', false);
     if (STORE.getNewBookmarkStatus() === true) {
       //UI changes
       $('.controls').append(generateAdd());
