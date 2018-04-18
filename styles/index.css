@@ -39,6 +39,8 @@ header {
 .top-controls {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+
 }
 
 /* Titles */
@@ -55,6 +57,7 @@ h2 {
 /* Add New Bookmark Button */
 #new-bookmark-btn, .edit-btn {
   color:white;
+  font-weight: bold;
   border: none;
   background: rgb(12, 52, 85);
   padding: 10px;
@@ -91,6 +94,7 @@ input[type=checkbox] + label {
   border-radius: 10px;
   box-shadow: 0px 0px 2px rgb(145, 145, 145);
   cursor: pointer;
+  margin-left: 20px;
 }
 
 input[type=checkbox] + label,
@@ -328,7 +332,11 @@ ul {
   text-align: center;
   color: white;
 }
-
+@media (max-width:445px){
+  select {
+    margin: 20px 20px;
+  }
+}
 @media (min-width:380px) and  (max-width: 700px) {
   .bookmark-ranking, .delete-btn {
     margin-left: 50px;
