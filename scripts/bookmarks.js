@@ -58,11 +58,13 @@ const BOOKMARKS = (function() {
 
   //generate template string based on bookmark object from local store
   const generateBookmark = (bookmark) => {
+    let prettyRank = `Rating: ${bookmark.rating}/5`;
+    if (bookmark.rating === null) prettyRank = 'Rating Not Set';
     return `
   <li class="bookmark" data-id="${bookmark.id}">
     <button class="expandToggle">+</button>
     <span class="bookmark-title">${bookmark.title}</span>
-    <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
+    <span class="bookmark-ranking">${prettyRank}</span>
   </li>`;
   };
 
@@ -161,7 +163,7 @@ const BOOKMARKS = (function() {
       let bookmarkRating = $('#bookmark-rating').val();
       if(bookmarkRating === '') bookmarkRating = undefined;
       let bookmarkDesc = $('#bookmark-desc').val();
-      if(bookmarkDesc === '') bookmarkDesc = undefined;
+      if(bookmarkDesc === '') bookmarkDesc = 'no description set';
       API.createBookmark(bookmarkTitle, 
         bookmarkURL,
         bookmarkRating, 
