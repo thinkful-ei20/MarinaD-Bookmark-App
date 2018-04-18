@@ -43,14 +43,14 @@ const BOOKMARKS = (function() {
       <button class="expandToggle">-</button>
       <form id="edit-bookmark">
         <label for="title-edit"></label>
-        <input type="text" id="title-edit" class="bookmark-title-edit" placeholder="${bookmark.title}">
+        <input type="text" id="title-edit" class="bookmark-title-edit" placeholder="Title: (currently ${bookmark.title})">
         <label for="rating-edit"></label>
-        <input type="number" id="rating-edit" class="bookmark-ranking-edit" placeholder="${bookmark.rating}">
+        <input type="number" id="rating-edit" class="bookmark-ranking-edit" placeholder="Rating: (currently ${bookmark.rating})">
         <label for="url-edit"></label>
-        <input type="text" id="url-edit" class="bookmark-url-edit" placeholder="${bookmark.url}">
+        <input type="text" id="url-edit" class="bookmark-url-edit" placeholder="URL (currently ${bookmark.url})">
         <label for="desc-edit"></label>
-        <input type="textarea" id="desc-edit" class="bookmark-description-edit" placeholder="${bookmark.desc}">
-        <button type="submit">Edit This Bookmark</button>  
+        <input type="textarea" id="desc-edit" class="bookmark-description-edit" placeholder="Description (currently ${bookmark.desc})">
+        <button type="submit" class="edit-btn-submit">Edit This Bookmark</button>  
       </form> 
       <button class="cancel-edit">Cancel</button>   
     </li>`;

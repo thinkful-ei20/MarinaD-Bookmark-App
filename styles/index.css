@@ -163,7 +163,7 @@ form input{
   border: 1px solid grey;
   border-radius: 2px;
 }
-#add-btn-submit {
+#add-btn-submit, .edit-btn-submit {
   display: block;
   width: 90%;
   margin-right: auto;
@@ -178,12 +178,12 @@ form input{
   cursor: pointer;
 }
 
-#add-btn-submit:hover{
+#add-btn-submit:hover, .edit-btn-submit:hover{
   background:rgb(57, 117, 167);
   -webkit-transition: background .5s;
   transition: background .5s;
 }
-.cancel-add {
+.cancel-add, .cancel-edit {
   display: inline-block;
   width: 100%;
   margin: 0 auto;
