@@ -1,3 +1,13 @@
+/* Classes for general UI Use */
+.hidden {
+  display: none;
+}
+
+.disabledBtn {
+  background: grey !important;
+}
+
+/* Full-Size background image */
 html {
   background: url(bodybg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -6,6 +16,7 @@ html {
   background-size: cover;
 }
 
+/* Header area and controls */
 header {
   background: rgb(12, 52, 85);
   border: 1px solid white;
@@ -28,6 +39,18 @@ header {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* Titles */
+h1 {
+  text-align: center;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  color: white;  
+}
+
 /* Add New Bookmark Button */
 #new-bookmark-btn {
   color:white;
@@ -37,6 +60,7 @@ header {
   box-shadow: 0px 0px 2px rgb(145, 145, 145);
   margin: 20px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #new-bookmark-btn:hover {
@@ -44,6 +68,8 @@ header {
   transition: background 1s;
   -webkit-transition: background 1s;
 }
+
+
 
 /* Toggle Switch */
 input[type=checkbox] {
@@ -63,6 +89,7 @@ input[type=checkbox] + label {
   width: 200px;
   border-radius: 10px;
   box-shadow: 0px 0px 2px rgb(145, 145, 145);
+  cursor: pointer;
 }
 
 input[type=checkbox] + label,
@@ -120,12 +147,10 @@ select {
   margin: 0 10px;
   padding: 3px;
   box-shadow: 0px 0px 2px rgb(145, 145, 145);
+  cursor: pointer;
 }
 
-.new-bookmark {
-  background: white;
-  padding: 0px 20px;
-}
+/* New Bookmark Form Styling */
 
 form input{
   display: block;
@@ -146,8 +171,10 @@ form input{
   padding: 5px;
   border: none;
   background: rgb(12, 52, 85);
-  border-radius: 2px;
+  border-radius: 10px;
   color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #add-btn-submit:hover{
@@ -165,25 +192,16 @@ form input{
   color: rgb(12, 52, 85);
 
 }
-h1 {
-  text-align: center;
-  color: white;
+
+.new-bookmark {
+  background: white;
+  padding: 0px 20px;
 }
 
-h2.subtitle {
-  text-align: center;
-  color: white;  
-}
 
-h3 {
-  padding: 5px;
-  font-weight: 400;
-  color: rgb(12, 52, 85);
-}
 
-.hidden {
-  display: none;
-}
+
+
 
 ul {
   list-style: none;

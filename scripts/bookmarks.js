@@ -84,16 +84,17 @@ const BOOKMARKS = (function() {
     $('main').prop('hidden', false);
     if (STORE.getNewBookmarkStatus() === true) {
       //UI changes
-      $('.controls').append(generateAdd());
+      $('.controls').after(generateAdd());
       $('#new-bookmark-btn')
-        .addClass('hidden')
-        .after('<p class="adding-title">New Bookmark</p>');
+        .attr('disabled', true)
+        .addClass('disabledBtn');
       STORE.setNewBookmark(false);
     }
     else{
-      $('.controls').find('.new-bookmark').remove();
+      $('header').find('.new-bookmark').remove();
       $('.controls').find('.adding-title').remove();
-      $('#new-bookmark-btn').removeClass('hidden');
+      $('#new-bookmark-btn').removeClass('disabledBtn');
+      $('#new-bookmark-btn').attr('disabled', false);
     }
 
     //read from STORE and add bookmarks
@@ -144,14 +145,15 @@ const BOOKMARKS = (function() {
   };
   
   const handleCancelAdd = () => {
-    $('.controls').on('click', '.cancel-add', ()=>{
+    $('header').on('click', '.cancel-add', ()=>{
+      console.log('I ran!');
       STORE.setNewBookmark(false);
       render();
     });
   };
 
   const handleAddSubmit = () => {
-    $('.controls').on('submit', '#new-bookmark-form', (event)=> {
+    $('header').on('submit', '#new-bookmark-form', (event)=> {
       event.preventDefault();
 
       const bookmarkTitle = $('#bookmark-title').val();
