@@ -82,6 +82,8 @@ const BOOKMARKS = (function() {
 
 
   const render = () => {
+    //show total bookmarks
+    $('#total-bookmarks').html(STORE.getAllBookmarks().length);
     //what to do if user clicks "add new bookmark"
     $('main').prop('hidden', false);
     if (STORE.getNewBookmarkStatus() === true) {
