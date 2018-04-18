@@ -9,7 +9,7 @@
 
 /* Full-Size background image */
 html {
-  background: url(bodybg.jpg) no-repeat center center fixed;
+  background: linear-gradient(rgb(128, 157, 253), rgb(53, 83, 180)) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -22,6 +22,7 @@ header {
   border: 1px solid white;
   margin: 20px 20px;
   border-radius: 10px;
+  box-shadow: rgba(12, 19, 85, 0.4) 0px 0px 5px 0px;
 }
 
 .controls {
@@ -52,7 +53,7 @@ h2 {
 }
 
 /* Add New Bookmark Button */
-#new-bookmark-btn {
+#new-bookmark-btn, .edit-btn {
   color:white;
   border: none;
   background: rgb(12, 52, 85);
@@ -63,10 +64,10 @@ h2 {
   cursor: pointer;
 }
 
-#new-bookmark-btn:hover {
+#new-bookmark-btn:hover, .edit-btn:hover {
   background: rgb(57, 117, 167);
-  transition: background 1s;
-  -webkit-transition: background 1s;
+  transition: background .5s;
+  -webkit-transition: background .5s;
 }
 
 
@@ -179,8 +180,8 @@ form input{
 
 #add-btn-submit:hover{
   background:rgb(57, 117, 167);
-  -webkit-transition: background 1s;
-  transition: background 1s;
+  -webkit-transition: background .5s;
+  transition: background .5s;
 }
 .cancel-add {
   display: inline-block;
@@ -198,11 +199,28 @@ form input{
   padding: 0px 20px;
 }
 
+.expandToggle {
+  border-radius: 50%;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgb(12, 52, 85);
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+}
 
+button {
+  cursor: pointer;
+}
 
-
-
-
+li {
+  background: rgba(255,255,255,.4);
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: rgba(12, 19, 85, 0.4) 0px 0px 5px 0px;
+}
 ul {
   list-style: none;
   margin: 0;
@@ -210,19 +228,75 @@ ul {
 }
 
 .bookmark {
-  border: 1px solid grey;
   margin: 10px 10px;
-  background: white;
 }
 
-.app-results {
-  background: rgba(255,255,255,.7);
-  margin: 0px 20px;
+.bookmark-title {
+  background: white;
+  display: inline-block;
+  width: 60%;
+  padding: 5px 5px 5px 2%;
+  border-radius: 10px;
+  margin-left: 5px;
 }
+
 
 .bookmark-ranking {
-  margin-left: 10px;
+  background: white;
+  display: inline-block;
+  width: 25%;
+  padding: 5px 5px 5px 2%;
+  border-radius: 10px;
+  margin-left: 5px;
 }
+
+.bookmark-url {
+  background: white;
+  display: inline-block;
+  width: 88%;
+  padding: 5px 5px 5px 2%;
+  border-radius: 10px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+}
+
+.bookmark-description {
+  background: white;
+  display: inline-block;
+  width: 88%;
+  padding: 5px 5px 5px 2%;
+  border-radius: 10px;
+  margin-left: 50px;
+  margin-top: 0px;
+}
+
+
+
+.edit-btn {
+  margin: 5px 5px 5px 50px !important;
+  width: 200px;
+}
+
+.delete-btn {
+  background: white;
+  border: none;
+  color: red;
+  padding: 10px;
+  box-shadow: 0px 0px 2px rgb(145, 145, 145);
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+  width: 200px;
+}
+
+.delete-btn:hover {
+  background: rgb(94, 24, 24);
+  color: white;
+  transition: background .5s, color .5s;
+  -webkit-transition: background .5s, color .5s;
+}
+
 #overlay {
   position: fixed;
   top: 0;
@@ -255,3 +329,20 @@ ul {
   color: white;
 }
 
+@media (min-width:380px) and  (max-width: 700px) {
+  .bookmark-ranking, .delete-btn {
+    margin-left: 50px;
+  }
+  .bookmark-ranking, .bookmark-title, .bookmark-url, .bookmark-description {
+    width: 80%;
+  }
+  }
+  @media (max-width: 380px){
+  .bookmark-ranking, .bookmark-url, .bookmark-description {
+    margin-left:50px;
+    width: 60%;
+  }
+  .delete-btn{
+    margin-left: 50px;
+  }
+  }

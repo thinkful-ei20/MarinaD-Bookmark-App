@@ -10,9 +10,9 @@ const BOOKMARKS = (function() {
     <div class="new-bookmark">
       <form id="new-bookmark-form">
         <lable for="bookmark-title"></lable>
-          <input type="text" placeholder="Bookmark Title" id="bookmark-title">
+          <input required type="text" placeholder="Bookmark Title" id="bookmark-title">
         <lable for="bookmark-url"></lable>
-          <input type="text" placeholder="Bookmark URL" id="bookmark-url">
+          <input required type="text" placeholder="Bookmark URL" id="bookmark-url">
         <lable for="bookmark-rating"></lable>
           <input type="number" placeholder="Rating" id="bookmark-rating">
         <lable for="bookmark-desc"></lable>
@@ -27,10 +27,10 @@ const BOOKMARKS = (function() {
   const generateExpanded = (bookmark) => {
     return `
     <li class="bookmark" data-id="${bookmark.id}">
-      <button class="expandToggle">Expand</button>
+      <button class="expandToggle">-</button>
       <span class="bookmark-title">${bookmark.title}</span>
       <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
-      <p class="bookmark-url">${bookmark.url} <a href="${bookmark.url}">Visit Site</a></p>
+      <p class="bookmark-url"><a href="${bookmark.url}">${bookmark.url}</a></p>
       <p class="bookmark-description">${bookmark.desc}</p>
       <button class="edit-btn">Edit</button>
       <button class="delete-btn">Delete</button>      
@@ -40,7 +40,7 @@ const BOOKMARKS = (function() {
   const generateEdit = (bookmark) => {
     return `
     <li class="bookmark" data-id="${bookmark.id}">
-      <button class="expandToggle">Expand</button>
+      <button class="expandToggle">-</button>
       <form id="edit-bookmark">
         <label for="title-edit"></label>
         <input type="text" id="title-edit" class="bookmark-title-edit" placeholder="${bookmark.title}">
@@ -60,7 +60,7 @@ const BOOKMARKS = (function() {
   const generateBookmark = (bookmark) => {
     return `
   <li class="bookmark" data-id="${bookmark.id}">
-    <button class="expandToggle">Expand</button>
+    <button class="expandToggle">+</button>
     <span class="bookmark-title">${bookmark.title}</span>
     <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
   </li>`;
