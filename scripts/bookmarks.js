@@ -10,13 +10,13 @@ const BOOKMARKS = (function() {
     <div class="new-bookmark">
       <form id="new-bookmark-form">
         <lable for="bookmark-title"></lable>
-          <input required type="text" placeholder="Bookmark Title" id="bookmark-title">
+          <input title="Bookmark Title" aria-labelledby="bookmark-title" required type="text" placeholder="Bookmark Title" id="bookmark-title">
         <lable for="bookmark-url"></lable>
-          <input required type="text" placeholder="Bookmark URL" id="bookmark-url">
+          <input title="Bookmark URL" aria-labelledby="bookmark-url"required type="text" placeholder="Bookmark URL" id="bookmark-url">
         <lable for="bookmark-rating"></lable>
-          <input type="number" placeholder="Rating" id="bookmark-rating">
+          <input title="Bookmark Rating" aria-labelledby="bookmark-rating"type="number" placeholder="Rating" id="bookmark-rating">
         <lable for="bookmark-desc"></lable>
-          <input type="textarea" placeholder="Description (optional)" id="bookmark-desc">
+          <input title="Bookmark Description" aria-labelledby="bookmark-desc"type="textarea" placeholder="Description (optional)" id="bookmark-desc">
         
         <button id="add-btn-submit" type="submit">Add!</button>
       </form>
@@ -25,13 +25,17 @@ const BOOKMARKS = (function() {
   };
 
   const generateExpanded = (bookmark) => {
+    let prettyRank = `Rating: ${bookmark.rating}/5`;
+    if (bookmark.rating === null) prettyRank = 'Rating Not Set';
+    let prettyDesc = bookmark.desc;
+    if (prettyDesc === null) prettyDesc = 'No description';
     return `
     <li class="bookmark" data-id="${bookmark.id}">
       <button class="expandToggle">-</button>
       <span class="bookmark-title">${bookmark.title}</span>
-      <span class="bookmark-ranking">Rating: ${bookmark.rating}/5</span>
+      <span class="bookmark-ranking">${prettyRank}</span>
       <p class="bookmark-url"><a href="${bookmark.url}">${bookmark.url}</a></p>
-      <p class="bookmark-description">${bookmark.desc}</p>
+      <p class="bookmark-description">${prettyDesc}</p>
       <button class="edit-btn">Edit</button>
       <button class="delete-btn">Delete</button>      
     </li>`;
@@ -43,13 +47,13 @@ const BOOKMARKS = (function() {
       <button class="expandToggle">-</button>
       <form id="edit-bookmark">
         <label for="title-edit"></label>
-        <input type="text" id="title-edit" class="bookmark-title-edit" placeholder="Title: (currently ${bookmark.title})">
+        <input title="Bookmark Title" aria-labelledby="title-edit" type="text" id="title-edit" class="bookmark-title-edit" placeholder="Title: (currently ${bookmark.title})">
         <label for="rating-edit"></label>
-        <input type="number" id="rating-edit" class="bookmark-ranking-edit" placeholder="Rating: (currently ${bookmark.rating})">
+        <input title="Bookmark Ranking" aria-labelledby="rating-edit" type="number" id="rating-edit" class="bookmark-ranking-edit" placeholder="Rating: (currently ${bookmark.rating})">
         <label for="url-edit"></label>
-        <input type="text" id="url-edit" class="bookmark-url-edit" placeholder="URL (currently ${bookmark.url})">
+        <input title="Bookmark URL" aria-labelledby="url-edit" type="text" id="url-edit" class="bookmark-url-edit" placeholder="URL (currently ${bookmark.url})">
         <label for="desc-edit"></label>
-        <input type="textarea" id="desc-edit" class="bookmark-description-edit" placeholder="Description (currently ${bookmark.desc})">
+        <input title="Bookmark Description" aria-labelledby="desc-edit" type="textarea" id="desc-edit" class="bookmark-description-edit" placeholder="Description (currently ${bookmark.desc})">
         <button type="submit" class="edit-btn-submit">Edit This Bookmark</button>  
       </form> 
       <button class="cancel-edit">Cancel</button>   
@@ -84,6 +88,7 @@ const BOOKMARKS = (function() {
   const render = () => {
     //show total bookmarks
     $('#total-bookmarks').html(STORE.getAllBookmarks().length);
+
     //what to do if user clicks "add new bookmark"
     $('main').prop('hidden', false);
     if (STORE.getNewBookmarkStatus() === true) {
@@ -93,12 +98,14 @@ const BOOKMARKS = (function() {
         .attr('disabled', true)
         .addClass('disabledBtn');
       STORE.setNewBookmark(false);
+      STORE.setNewFormCreated(true);
     }
     else{
       $('header').find('.new-bookmark').remove();
       $('.controls').find('.adding-title').remove();
       $('#new-bookmark-btn').removeClass('disabledBtn');
       $('#new-bookmark-btn').attr('disabled', false);
+      STORE.setNewFormCreated(false);
     }
 
     //read from STORE and add bookmarks
@@ -119,6 +126,7 @@ const BOOKMARKS = (function() {
       }      
     }).join('');
     $('.bookmarks').html(html);
+
     //Check if there is an error
     if (STORE.error !== null){
       $('.controls').append(generateErrorMsg());
@@ -150,7 +158,6 @@ const BOOKMARKS = (function() {
   
   const handleCancelAdd = () => {
     $('header').on('click', '.cancel-add', ()=>{
-      console.log('I ran!');
       STORE.setNewBookmark(false);
       render();
     });

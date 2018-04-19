@@ -46,11 +46,13 @@ header {
 h1 {
   text-align: center;
   color: white;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 h2 {
   text-align: center;
   color: white;  
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 /* Add New Bookmark Button */

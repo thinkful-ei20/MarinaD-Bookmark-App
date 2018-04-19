@@ -9,6 +9,8 @@ const STORE = (function() {
   let expansionStatus = false;  
   let bookmarks = [];
   let error = null;
+  let newFormCreated = false;
+  let editFormCreated = false;
   //CRUD Functions, public
 
   //Create Functions
@@ -49,9 +51,22 @@ const STORE = (function() {
   };
 
   //Update Functions
+
+  //Set NewFormCreated variable where status is true or false
+  const setNewFormCreated = (status) => {
+    newFormCreated = status;
+  };
+
+  //Set EditFormCreated variable where status is true or false
+  const setEditFormCreated = (status) => {
+    editFormCreated = status;
+  };
+
   //Set NewBookmark variable where status is true or false
   const setNewBookmark = (status) => {
     newBookmark = status;
+    console.log(getNewBookmarkStatus());
+    console.trace();
   };
 
   //Set SortBy variable where filter is a string
@@ -86,6 +101,7 @@ const STORE = (function() {
   };
 
   return {
+
     //create function
     addBookmark,
 
@@ -104,6 +120,8 @@ const STORE = (function() {
     setExpansionStatus,
     setBookmarkExpansion,
     setBookmarkEdit,
+    setNewFormCreated,
+    setEditFormCreated,
     updateBookmark,
 
     //delete functions
