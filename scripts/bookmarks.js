@@ -84,6 +84,13 @@ const BOOKMARKS = (function() {
     `;
   };
 
+  const renderError = () => {
+    if (STORE.error !== null){
+      $('.controls').append(generateErrorMsg());
+      handleErrorClose();
+      STORE.error = null;
+    }
+  };
 
   const render = () => {
     //show total bookmarks
@@ -98,14 +105,12 @@ const BOOKMARKS = (function() {
         .attr('disabled', true)
         .addClass('disabledBtn');
       STORE.setNewBookmark(false);
-      STORE.setNewFormCreated(true);
     }
     else{
       $('header').find('.new-bookmark').remove();
       $('.controls').find('.adding-title').remove();
       $('#new-bookmark-btn').removeClass('disabledBtn');
       $('#new-bookmark-btn').attr('disabled', false);
-      STORE.setNewFormCreated(false);
     }
 
     //read from STORE and add bookmarks
@@ -126,20 +131,13 @@ const BOOKMARKS = (function() {
       }      
     }).join('');
     $('.bookmarks').html(html);
-
-    //Check if there is an error
-    if (STORE.error !== null){
-      $('.controls').append(generateErrorMsg());
-      handleErrorClose();
-      STORE.error = null;
-    }
   };
 
   //Error Handler
   const handleError = (result) => {
     const errStr = `Oops! ${result.responseJSON.message}`;
     STORE.error = errStr;
-    render();
+    renderError();
   };
 
   const handleErrorClose = () =>{
