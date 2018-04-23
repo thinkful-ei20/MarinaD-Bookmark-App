@@ -78,7 +78,7 @@ const BOOKMARKS = (function() {
       <div id="overlay"></div>
       <div id="error-message">
         <p id="error-content">${STORE.error}</p>
-        <a href="#" id="err-close">close</a>
+        <a href="#" class="err-close">close</a>
       </div>
     </div>
     `;
@@ -141,7 +141,7 @@ const BOOKMARKS = (function() {
   };
 
   const handleErrorClose = () =>{
-    $('#err-close').on('click', ()=>{
+    $('.err-close').on('click', ()=>{
       $('.controls').find('.modal').remove();
     });
   };

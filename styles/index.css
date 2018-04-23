@@ -25,7 +25,7 @@ header {
   box-shadow: rgba(12, 19, 85, 0.4) 0px 0px 5px 0px;
 }
 
-.controls {
+#controls-form {
   background:white;
   display: flex;
   align-items: center;
@@ -328,7 +328,7 @@ ul {
   border-radius: 8px;
 }
 
-#err-close {
+.err-close {
   display: block;
   text-align: center;
   color: white;

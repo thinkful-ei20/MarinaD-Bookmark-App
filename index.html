@@ -26,28 +26,29 @@
       
       <!-- Controls Container -->
       <div class="controls">
+        <form id="controls-form">
         
         <!-- Add new bookmark -->
-        <button id="new-bookmark-btn">Add New Bookmark</button>
+          <button id="new-bookmark-btn">Add New Bookmark</button>
 
-        <div class="top-controls">
-          <!-- Expand All -->
-          <input aria-lable="expand-all" title="Expand or Collapse All Bookmarks" id="expand-all" class="expand-all" type="checkbox" unchecked>
-          <label for="expand-all" data-text-true="Collapse All" data-text-false="Expand All"><i></i></label>
+          <div class="top-controls">
+            <!-- Expand All -->
+            <input aria-lable="expand-all" title="Expand or Collapse All Bookmarks" id="expand-all" class="expand-all" type="checkbox" unchecked>
+            <label for="expand-all" data-text-true="Collapse All" data-text-false="Expand All"><i></i></label>
 
-          <!-- Sort By Rating -->
-          <lable class="dropdown" for="sort-by"></lable>
-          <select aria-label="sort-by" title="Sort By Rating" id="sort-by">
-            <option value= "0">Sort By Ranking</option>
-            <option value="0">All</option>
-            <option value="1">At Least 1 Star</option>
-            <option value="2">At Least 2 Stars</option>
-            <option value="3">At Least 3 Stars</option>
-            <option value="4">At Least 4 Stars</option>
-            <option value="5">At Least 5 Stars</option>
-          </select>
-        </div>
-
+            <!-- Sort By Rating -->
+            <lable class="dropdown" for="sort-by"></lable>
+            <select aria-label="sort-by" title="Sort By Rating" id="sort-by">
+              <option value= "0">Sort By Ranking</option>
+              <option value="0">All</option>
+              <option value="1">At Least 1 Star</option>
+              <option value="2">At Least 2 Stars</option>
+              <option value="3">At Least 3 Stars</option>
+              <option value="4">At Least 4 Stars</option>
+              <option value="5">At Least 5 Stars</option>
+            </select>
+          </div>
+        </form> 
       </div>
     </header>
 
